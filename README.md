@@ -47,8 +47,8 @@ intensive. The following shell command can be used as a stop gap until an
 easier way to do this has been implemented.
 
     grep -o 'hubot-[a-z0-9_-]\+' external-scripts.json | \
-      xargs -n1 -i sh -c 'sed -n "/^# Configuration/,/^#$/ s/^/{} /p" \
-          $(find node_modules/{}/ -name "*.coffee")' | \
+      xargs -n1 -i sh -c 'sed -n "/^// Configuration/,/^#$/ s/^/{} /p" \
+          $(find node_modules/{}/ -name "*.js")' | \
         awk -F '#' '{ printf "%-25s %s\n", $1, $2 }'
 
 How to set environment variables will be specific to your operating system.
@@ -57,7 +57,7 @@ it's suggested that you search for a dedicated guide focused on your OS.
 
 ### Scripting
 
-An example script is included at `scripts/example.coffee`, so check it out to
+An example script is included at `scripts/example.js`, so check it out to
 get started, along with the [Scripting Guide](scripting-docs).
 
 For many common tasks, there's a good chance someone has already one to do just
