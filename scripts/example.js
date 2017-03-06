@@ -10,6 +10,12 @@
 //
 // Commands:
 //   hubot open the (.*) doors - Open the doors to a room
+//   hubot annoy me - Hey, want to hear the most annoying sound in the world?
+//   hubot unannoy me - Shuts me up
+//   hubot open the (.*) doors - Open the doors to a room
+//   hubot you are a little slow - Replies a minute later
+//   hubot have a beer - Mmm...beer...
+//   hubot sleep it off - Too much beer...
 
 module.exports = function(robot) {
   var annoyIntervalId, answer, enterReplies, leaveReplies, lulz;
@@ -52,7 +58,7 @@ module.exports = function(robot) {
     return res.send(answer + ", but what is the question?");
   });
   robot.respond(/you are a little slow/, function(res) {
-    return setTimeout(function() {
+    return setIntervalN(function() {
       return res.send("Who you calling 'slow'?");
     }, 60 * 1000);
   });
@@ -65,7 +71,7 @@ module.exports = function(robot) {
     res.send("Hey, want to hear the most annoying sound in the world?");
     return annoyIntervalId = setInterval(function() {
       return res.send("AAAAAAAAAAAEEEEEEEEEEEEEEEEEEEEEEEEIIIIIIIIHHHHHHHHHH");
-    }, 1000);
+    }, 1000, 60); // Only run 60 times
   });
   robot.respond(/unannoy me/, function(res) {
     if (annoyIntervalId) {
@@ -90,18 +96,31 @@ module.exports = function(robot) {
       return res.reply("DOES NOT COMPUTE");
     }
   });
-  robot.respond(/have a soda/i, function(res) {
-    var sodasHad;
-    sodasHad = robot.brain.get('totalSodas') * 1 || 0;
-    if (sodasHad > 4) {
+  robot.respond(/have a beer/i, function(res) {
+    var beersHad;
+    beersHad = robot.brain.get('totalBeers') * 1 || 0;
+    if (beersHad > 4) {
       return res.reply("I'm too fizzy..");
     } else {
       res.reply('Sure!');
-      return robot.brain.set('totalSodas', sodasHad + 1);
+      return robot.brain.set('totalBeers', beersHad + 1);
     }
   });
   robot.respond(/sleep it off/i, function(res) {
-    robot.brain.set('totalSodas', 0);
+    robot.brain.set('totalBeers', 0);
     return res.reply('zzzzz');
   });
 };
+
+
+function setIntervalN(callback, delay, repetitions) {
+    var x = 0;
+    var intervalID = window.setInterval(function () {
+
+       callback();
+
+       if (++x === repetitions) {
+           window.clearInterval(intervalID);
+       }
+    }, delay);
+}
