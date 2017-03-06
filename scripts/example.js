@@ -12,7 +12,6 @@
 //   hubot open the (.*) doors - Open the doors to a room
 //   hubot annoy me - Hey, want to hear the most annoying sound in the world?
 //   hubot unannoy me - Shuts me up
-//   hubot open the (.*) doors - Open the doors to a room
 //   hubot you are a little slow - Replies a minute later
 //   hubot have a beer - Mmm...beer...
 //   hubot sleep it off - Too much beer...
