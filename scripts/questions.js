@@ -35,7 +35,7 @@ module.exports = function(robot) {
         best = robot.brain.get("document-"+i)
       }
     });
-    robot.send("The closest match is: "+best)
+    res.send("The closest match is: "+best)
   });
 
 }
