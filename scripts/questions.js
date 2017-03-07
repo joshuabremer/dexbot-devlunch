@@ -22,7 +22,7 @@ module.exports = function(robot) {
     robot.brain.set("documentIndex", JSON.stringify(tfidf));
   });
 
-  robot.respond(/(.*)?/i, function(res) {
+  robot.respond(/(.*)\?$/i, function(res) {
     var question = res.match[1]
     res.send("You asked a question: " + question)
     var tfidf = loadIndex(robot)
