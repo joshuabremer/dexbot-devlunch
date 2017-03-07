@@ -18,18 +18,18 @@ module.exports = function(robot) {
       var jiraBody = JSON.parse(body);
       var url = 'https://jira.sweetspotdiabetesops.com:8443/browse/' + ticketKey;
       try {
-      var ticketSummary = jiraBody.fields.summary;
-      var assignee = jiraBody.fields.assignee.displayName;
-      var status = jiraBody.fields.status.name;
+        var ticketSummary = jiraBody.fields.summary;
+        var assignee = jiraBody.fields.assignee.displayName;
+        var status = jiraBody.fields.status.name;
 
-      res.send(url);
-      res.send('Name: ' + ticketSummary);
-      res.send('Assignee: ' + assignee);
-      res.send('Status: ' + status);
-    } catch(error) {
-      res.send('Error displaying info for ' + ticketKey);
-      res.send(error.stack);
-    }
+        res.send(url);
+        res.send('Name: ' + ticketSummary);
+        res.send('Assignee: ' + assignee);
+        res.send('Status: ' + status);
+      } catch(error) {
+        res.send('Error displaying info for ' + ticketKey);
+        res.send(error.stack);
+      }
     });
   });
 };
