@@ -6,7 +6,7 @@ module.exports = function(robot) {
     var productStore;
     productStore = res.match[1];
     var baseUrl = "https://productstore.sweetspot" + productStore + ".com/"
-    var jsonUrl = baseUrl = "products.json"
+    var jsonUrl = baseUrl + "products.json"
     return res.http(jsonUrl)
       .get()(function(err, response, body) {
       if(err) {
