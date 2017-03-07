@@ -1,21 +1,21 @@
 var natural = require('natural'),
     TfIdf = natural.TfIdf;
 
-var loadIndex = function() {
+var loadIndex = function(robot) {
   var indexString = robot.brain.get("documentIndex");
     if (indexString) {
       var tfidf = new TfIdf(JSON.parse(indexString));
     } else {
       var tfidf = new TfIdf();
     }
-  tfidf
+  return tfidf;
 }
 
 module.exports = function(robot) {
   robot.hear(/(.*)/, function(res) {
     var message = res.match[1];
 
-    var tfidf = loadIndex();
+    var tfidf = loadIndex(robot);
     tfidf.addDocument(message);
     var documentId = tfidf.documents.length;
     robot.brain.set("document-"+documentId, message);
@@ -25,7 +25,7 @@ module.exports = function(robot) {
   robot.respond(/(.*)?/i, function(res) {
     var question = res.match[1]
     res.send("You asked a question: " + question)
-    var tfidf = loadIndex()
+    var tfidf = loadIndex(robot)
 
     var best = "Not found"
     var bestScore = 0
