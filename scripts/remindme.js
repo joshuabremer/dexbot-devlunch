@@ -21,13 +21,13 @@ module.exports = function(robot) {
 
 
   robot.respond(/when is standup/i, function(res) {
-    msg.reply(robot.brain.get('standupTime'));
+    res.reply(robot.brain.get('standupTime'));
   });
 
   robot.respond(/change standup time to (.*)/i, function(res) {
     var newStandupTime = res.match[1];
     robot.brain.set('standupTime', newStandupTime);
-    msg.reply(robot.brain.get('standupTime'));
+    res.reply(robot.brain.get('standupTime'));
   });
 
   robot.respond(/remind notetaker (.*)/i, function(res) {
@@ -37,7 +37,7 @@ module.exports = function(robot) {
     var TEN_MINUTES = 1000 * 60 * 60;
     var noteTaker = res.match[1];
     setTimeout(function() {
-      msg.send(noteTaker + ' hey, standup is in ten minutes. Get ready to take notes.');
+      res.send(noteTaker + ' hey, standup is in ten minutes. Get ready to take notes.');
     }, millisecondsUntilStandup - TEN_MINUTES);
   });
 
