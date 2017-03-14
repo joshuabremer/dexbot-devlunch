@@ -36,9 +36,10 @@ module.exports = function(robot) {
     var millisecondsUntilStandup = standupDateTime.diff(moment());
     var TEN_MINUTES = 1000 * 60 * 60;
     var noteTaker = res.match[1];
+    res.send('You got it, I will send out a message in ' + millisecondsUntilStandup + ' milliseconds')
     setTimeout(function() {
       res.send(noteTaker + ' hey, standup is in ten minutes. Get ready to take notes.');
-    }, millisecondsUntilStandup - TEN_MINUTES);
+    }, millisecondsUntilStandup);
   });
 
 };
