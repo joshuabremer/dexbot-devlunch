@@ -32,7 +32,8 @@ module.exports = function(robot) {
 
   robot.respond(/remind notetaker (.*)/i, function(res) {
     var standupTime = robot.brain.get('standupTime');
-    var standupDateTime = moment(standupTime, 'HH:mm').add(7, 'hours').add(1,'day');
+    var standupDateTime = moment(standupTime, 'HH:mm').add(7, 'hours')
+    // .add(1,'day');
     var millisecondsUntilStandup = standupDateTime.diff(moment());
     var TEN_MINUTES = 1000 * 60 * 60;
     var noteTaker = res.match[1];
